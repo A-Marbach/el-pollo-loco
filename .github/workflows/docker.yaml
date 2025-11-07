@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to VM via SSH
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/ubuntu/elpollo
+            cd /home/amarbach/elpollo-loco
             docker build -t elpollo:latest .
             docker stop elpollo || true
             docker rm elpollo || true
