@@ -35,6 +35,5 @@ jobs:
 
       - name: Deploy to VM via SSH
         run: |
-          run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
           "docker stop elpollo || true && docker rm elpollo || true && docker run -d -p 3002:3002 --name elpollo elpollo:latest"
