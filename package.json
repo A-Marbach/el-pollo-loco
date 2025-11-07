@@ -1,0 +1,12 @@
+{
+  "name": "jump-and-run",
+  "version": "1.0.0",
+  "description": "A simple JS jump and run game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
