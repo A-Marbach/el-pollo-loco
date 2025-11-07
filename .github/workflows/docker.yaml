@@ -24,9 +24,6 @@ jobs:
         run: npm install
         working-directory: .
 
-      - name: Build Docker image
-        run: docker build -t elpollo:latest .
-
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
@@ -35,5 +32,10 @@ jobs:
 
       - name: Deploy to VM via SSH
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-          "docker stop elpollo || true && docker rm elpollo || true && docker run -d -p 3002:3002 --name elpollo elpollo:latest"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /home/ubuntu/elpollo
+            docker build -t elpollo:latest .
+            docker stop elpollo || true
+            docker rm elpollo || true
+            docker run -d -p 3002:3002 --name elpollo elpollo:latest
+          EOF
